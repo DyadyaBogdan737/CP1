@@ -7,6 +7,7 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Scrabble
 {
@@ -31,7 +32,28 @@ namespace Scrabble
             // TODO - Implement the Score method. Hint you can implement this without selection statements. Think
             // about how what data you need and how you could store the date. Use your knowledge of the content
             // from the algorithms and data structures module you are also studying.
-            throw new NotImplementedException("You need to implement this method.");
+            //throw new NotImplementedException("You need to implement this method
+            char[] alphabet = ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T', 'D', 'G', 'B', 'C', 'M', 'P', 'F', 'H', 'V', 'W', 'Y', 'J', 'X', 'Q', 'Z', 'K'];
+            int[] score = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 8, 8, 10, 10, 5];
+            Dictionary<char, int> openWith = new Dictionary<char, int>();
+            int points = 0;
+
+            char[] letters = input.ToUpper().ToCharArray();
+
+            for (int i=0; i < alphabet.Length; i++)
+            {
+                openWith.Add(alphabet[i], score[i]);
+            }
+
+            for (int i = 0; i < letters.Length; i++)
+            {
+                if (openWith.ContainsKey(letters[i]))
+                {
+                    points += openWith[letters[i]];
+                }
+            }
+
+            return points;
         }
 
     }

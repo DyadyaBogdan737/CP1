@@ -35,8 +35,10 @@ public class BirdCount
     public static int[] LastWeek()
     {
         // TODO: Implement the 'LastWeek()' method
-        throw new NotImplementedException("Please implement the (static) BirdCount.LastWeek() method");
-        //return ;
+        // Declare an array with the values [0, 2, 5, 3, 7, 8, 4] and return it
+        int[] birds = {0, 2, 5, 3, 7, 8, 4};
+        //throw new NotImplementedException("Please implement the (static) BirdCount.LastWeek() method");
+        return birds;
     }
 
     /// <summary>
@@ -100,7 +102,7 @@ public class BirdCount
         int totalBirdsVisited = 0;
         for (int i = 0; i < numberOfDays; i++)
         {
-            totalBirdsVisited += _birdsPerDay[numberOfDays];
+            totalBirdsVisited += _birdsPerDay[i];
         }
         return totalBirdsVisited;
     }
@@ -114,7 +116,16 @@ public class BirdCount
     public int BusyDays()
     {
         // TODO: Implement the 'BusyDays()' method
-        throw new NotImplementedException("Please implement the BirdCount.BusyDays() method");
+        //throw new NotImplementedException("Please implement the BirdCount.BusyDays() method");
+        int isBusy = 0;
+        foreach (var item in _birdsPerDay)
+        {
+            if (item >= 5)
+            {
+                isBusy++;
+            }
+        }
+        return isBusy;
     }
 
 }
