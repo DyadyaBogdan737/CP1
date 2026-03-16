@@ -22,7 +22,15 @@ namespace RPG
     /// </summary>
 
     // TODO - Create an enumeration for game character state. 
-    
+
+    public enum CharacterState
+    {
+        Alive = 1,
+        Injured = 0,
+        Dead = -1
+    }
+
+
     public class GameCharacter
     {
         //Class fields (data members)
@@ -33,6 +41,7 @@ namespace RPG
         private double _weightLimit; //Must be > 0
         private double _totalWeightOfItems; //Cannot exceed weightLimit
         private int _food; //Must be >=0
+        private CharacterState _characterState;
 
         // Class properties
         public string CharacterName
@@ -56,7 +65,7 @@ namespace RPG
             get => _health;
             set
             {
-                if (value < 0)
+                if (value < 0 || value > 100)
                 {
                     throw new ArgumentException(
                         $"{nameof(value)} Health cannot be negative");
@@ -85,14 +94,37 @@ namespace RPG
         public double TotalWeightOfItems
         {
             get { return _totalWeightOfItems; }
+            set 
+            { _totalWeightOfItems = value; 
+                 if (value < 0 || value > WeightLimit)
+                {
+                    throw new ArgumentException(
+                        $"{nameof(value)} total weight of items cannot be negative or more than limit");
+                }
+            }
         }
+
+        //public CharacterState CharState
+        //{
+        //    get => characterState;
+        //    set
+        //    {
+        //        characterState = value;
+        //    }
+        //}
 
         public CharacterState CharState
         {
-            get => characterState;
+            get => CharState;
             set
             {
-                characterState = value;
+                int charValue = (int)value;
+                if (charValue < -1 || charValue > 1)
+                {
+                    throw new ArgumentException(
+                        $"Wrong value");
+                }
+                _characterState = value;
             }
         }
 
